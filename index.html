@@ -6,6 +6,11 @@
 
 		<title>reveal.js</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
 
@@ -20,12 +25,319 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+
+    <style>
+      .gold {
+        color: #fbc500 !important;
+      }
+      .title--normal {
+        font-family: 'Open Sans' !important; font-weight: 300;
+      }
+      .hr--fancy {
+        position: absolute; width: 35%; left: 50%; transform: translateX(-50%); opacity: 0.4 !important;
+      }
+      .hr--text {
+        font-family: 'Lobster' !important; text-transform: lowercase; position: relative; top: -15px; font-size: 60px !important; vertical-align: middle !important; background-color: #222 !important; padding: 0 20px !important;
+      }
+      .title--fancy {
+        font-family: 'Josefin Slab' !important; color: #fbc500 !important; text-transform: capitalize !important;
+      }
+      li {
+        list-style: square;
+      }
+      ul ul li {
+        opacity: 0.40;
+      }
+    </style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+
+        <section>
+
+          <h1 style="position: relative;">
+            <span class="title--normal">A/B Testing</span><br>
+            <hr class="hr--fancy" style="">
+            <span class="hr--text">in</span><br>
+            <span class="title--fancy">Hybrid Apps</span>
+          </h1>
+
+        </section>
+
+        <section>
+          <h1 class="title--fancy">Short Intro A/B Tests</h1>
+
+          <img src="./img/ab-test-intro.png" alt="A/B Test Intro" style="border: 0; background-color: transparent; box-shadow: none;">
+          <br>
+          <small style="position: relative; top: -20px; font-size: 16px; opacity: 0.6;">Source: VWO</small>
+        </section>
+
+        <section>
+
+            <h1 class="title--fancy">Why do we A/B Test?</h1>
+
+            <div style="width: 50%; float: left !important;">
+              <ul>
+                <li>We have an App that's been around for <span class="gold">over a year</span></li>
+                <ul>
+                  <li>Web, iOS, Android</li>
+                </ul>
+                <li>Improve your App based on numbers, not feelings</li>
+                <ul>
+                  <li>improve conversion rates</li>
+                  <li>test usage of new features</li>
+                </ul>
+              </ul>
+            </div>
+            <div style="width: 50%; float: right !important;">
+              <img src="./img/jw-mock.png" alt="JW mock" style="border: 0; background-color: transparent; box-shadow: none; padding-left: 10%;">
+            </div>
+
+        </section>
+
+				<section>
+
+          <h1 class="title--fancy">What do we want?</h1>
+          <ul>
+            <li>Easly start a new A/B Test</li>
+            <li>Code once for every platform</li>
+          </ul>
+
+        </section>
+
+        <section>
+
+          <section>
+            <h1 class="title--fancy">My A/B Test Journey</h1>
+
+            <ul>
+              <li>Over Several Months</li>
+              <li>Used Tools</li>
+              <ul>
+                <li>VWO</li>
+                <li>Optimizely</li>
+                <li>Google Experiments</li>
+                <li>Plain A/B Test Framework</li>
+              </ul>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="">Beginnings</h2>
+            <ul>
+              <li>Web</li>
+              <ul>
+                <li>Easy to deploy</li>
+                <li>Easy to fix/adjust</li>
+                <li>Easy to get traffic</li>
+              </ul>
+              <li>VWO</li>
+                <ul>
+                  <li>Big html libraries</li>
+                  <li>Felt a bit old</li>
+                </ul>
+              <li>Optimizely</li>
+                <ul>
+                  <li>Embraced Angular</li>
+                  <li>relies on Cookies</li>
+                  <li>heavy monkey patching for localStorage in hybrid app</li>
+                  <li>needs to know your event data</li>
+                </ul>
+            </ul>
+          </section>
+
+          <section>
+            <h2>iOS & Android: 🙅💩</h2>
+            <ul>
+              <li>"But Hybrid Apps are just WebViews!"</li>
+              <li>"But the libraries are just JavaScript?!"</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Google Analytics Experiments</h2>
+            <ul>
+              <li>Half Successful</li>
+              <li>Users get the right sample sized variants</li>
+              <li>Reporting: Web 👍, Mobile 💔</li>
+              <li>Every experiment needs to be created for each platform</li>
+              <ul>
+                <li>Create Exp, copy Exp ID, don't mess up, ...</li>
+                <li>Very prone to errors</li>
+              </ul>
+              <li>Hacky - you don't really follow their workflow</li>
+              <ul>
+                <li>Take the Experiment HTML Snippet</li>
+                <li>Extract Experiment ID</li>
+                <li>Shoot your events at that Experiment ID</li>
+              </ul>
+
+            </ul>
+          </section>
+
+          <section>
+            <h2>Plain A/B Test Framework</h2>
+            <ul>
+              <li>Rather unpopular Github Project: AlephBet (84⭐️)</li>
+              <ul>
+                <li>pure-javascript A/B (multivariate) testing framework for developers</li>
+              </ul>
+              <li>Define Goals</li>
+              <li>Define Experiments</li>
+              <li>Attach Goals to Experiments</li>
+              <li>Drawbacks</li>
+              <ul>
+                <li>No Shiny Dashboards</li>
+              </ul>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <h1 class="title--fancy">How does it work?</h1>
+          [graphic] <br><br>
+          <ul>
+            <li>User lands on page</li>
+            <li>trigger()?</li>
+            <ul>
+              <li>check if experiment is running</li>
+              <li>check if user is on right platform</li>
+              <li>check if user is in sample size</li>
+            </ul>
+            <li>activate experiment</li>
+            <ul>
+              <li>send <span class="gold">"experiment_start"</span></li>
+            </ul>
+            <li>potentially send <span class="gold">"goal_complete"</span></li>
+          </ul>
+        </section>
+
+        <section>
+
+          <section>
+            <h1 class="title--fancy">Implementation</h1>
+            <small>(Demo-ish Time)</small>
+          </section>
+
+          <section data-background="img/above-seasons.png">
+
+            <img class="fragment" src="./img/buybox-above-seasons.png" alt="BuyBox Above Seasons" style="border: 2px solid #fbc500; background-color: transparent; box-shadow: #fbc500 0px 0px 15px 0px;">
+
+
+
+          </section>
+
+          <section>
+            <h2>Adaption</h2>
+            <ul>
+              <li>Whatever tracker you use, easily to adapt</li>
+            </ul>
+
+            <pre><code class="javascript" data-trim>
+tracking_adapter: {
+  experiment_start: (experimentName, variant) => {
+    jwTrackingManager.eventTrack(variant, {
+      category: `EXP_${experimentName}`,
+      label: '__ACTIVATED__',
+      nonInteraction: true
+    });
+  },
+  goal_complete: (experimentName, variant, eventName) => {
+    jwTrackingManager.eventTrack(variant, {
+      category: `EXP_${experimentName}`,
+      label: `GOAL_${eventName}`,
+      nonInteraction: true
+    });
+  }
+}
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Goals</h2>
+
+            <pre><code class="javascript" data-trim>
+.run(($state, $rootScope, experimentRepository) => {
+  const goalName = 'CLICKOUT';
+  const goal = new window.AlephBet.Goal(goalName);
+  $rootScope.$on('clickout.clicked', () => goal.complete());
+
+  // experimentRepository = wrapper around AlephBet
+  experimentRepository.addGoal(goal);
+});
+            </code></pre>
+
+          </section>
+
+          <section>
+            <h2>Experiments</h2>
+
+            <pre><code class="javascript" data-trim>
+.run((experimentRepository, urlDataRepository, $timeout) => {
+  const experimentName = 'BUYBOX_ABOVE_SEASONS';
+  const goals = ['NOT_BOUNCED', 'PAGEVIEWS', 'CLICKOUT'];
+
+  $timeout(() => {
+    urlDataRepository.getActiveUrlPromise()
+      .then(urlData => {
+        const experimentData = {
+          name: experimentName,
+          variants: ['control', 'above_seasons'],
+          trigger: () => experimentRepository.isSeoTraffic() &&
+            urlData.object_type === 'show'
+        };
+        experimentRepository.addExperiment(experimentData, goals);
+      });
+  });
+});
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Our Experiment Config</h2>
+
+
+            <pre><code class="json" data-trim>
+{
+  "TRAILER_ZAPPER": {
+    "sample": 1.0,
+    "platforms": ["ios", "android"]
+  },
+  "ABOVE_SEASONS": {
+    "sample": 0.1,
+    "platforms": ["web"]
+  }
+}
+            </code></pre>
+
+          </section>
+
+          <section>
+            <h2>Result</h2>
+            <img src="./img/result-above-seasons.png" alt="Result Above Seasons" style="border: 0; background-color: transparent; box-shadow: none;">
+            <br>
+
+            <ul>
+              <li>A: <span style="opacity: 0.4">Control Group</span></li>
+              <li>B: <span style="opacity: 0.4">Above Seasons</span></li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <h1 class="title--fancy">Wrap-Up</h1>
+
+          <ul>
+            <li>Go simple</li>
+            <li>Don't get seduced by fancy dashboards</li>
+            <li>save <span class="gold">thousands</span> of €</li>
+            <li>implement fast and get results fast</li>
+          </ul>
+        </section>
+
 			</div>
 		</div>
 
