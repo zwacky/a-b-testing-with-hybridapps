@@ -68,9 +68,20 @@
         <section>
           <h1 class="title--fancy">Short Intro A/B Tests</h1>
 
-          <img src="./img/ab-test-intro.png" alt="A/B Test Intro" style="border: 0; background-color: transparent; box-shadow: none;">
-          <br>
-          <small style="position: relative; top: -20px; font-size: 16px; opacity: 0.6;">Source: VWO</small>
+          <div style="width: 50%; float: left !important;">
+            <img src="./img/optimizely-ab-testing.png" alt="A/B Test Intro" style="border: 0; background-color: white; box-shadow: none; padding: 10px;">
+            <br>
+            <small style="position: relative; top: -20px; font-size: 16px; opacity: 0.6;">Source: Optimizely</small>
+          </div>
+
+          <div style="width: 50%; float: left !important;">
+            <ul>
+              <li>Variations</li>
+              <li>Sample Size</li>
+              <li>Goals & Conversion Rate</li>
+              <li>Significance</li>
+            </ul>
+          </div>
         </section>
 
         <section>
@@ -98,9 +109,10 @@
 
 				<section>
 
-          <h1 class="title--fancy">What do we want?</h1>
+          <h1 class="title--fancy">What do Developers want?</h1>
           <ul>
-            <li>Easly start a new A/B Test</li>
+            <li>little overhead</li>
+            <li>implement fast, get results fast</li>
             <li>Code once for every platform</li>
           </ul>
 
@@ -148,7 +160,10 @@
           </section>
 
           <section>
-            <h2>iOS & Android: 🙅💩</h2>
+            <h2>
+              Web Frameworks with<br>
+              iOS & Android: 🙅💩
+            </h2>
             <ul>
               <li>"But Hybrid Apps are just WebViews!"</li>
               <li>"But the libraries are just JavaScript?!"</li>
@@ -159,17 +174,15 @@
             <h2>Google Analytics Experiments</h2>
             <ul>
               <li>Half Successful</li>
-              <li>Users get the right sample sized variants</li>
+              <li>Users in Sample Size</li>
               <li>Reporting: Web 👍, Mobile 💔</li>
-              <li>Every experiment needs to be created for each platform</li>
-              <ul>
-                <li>Create Exp, copy Exp ID, don't mess up, ...</li>
-                <li>Very prone to errors</li>
-              </ul>
+              <li>Tedious: Experiment creation * platform</li>
               <li>Hacky - you don't really follow their workflow</li>
               <ul>
                 <li>Take the Experiment HTML Snippet</li>
                 <li>Extract Experiment ID</li>
+                <li>Create Exp, copy Exp ID, don't mess up, ...</li>
+                <li>Very prone to errors</li>
                 <li>Shoot your events at that Experiment ID</li>
               </ul>
 
@@ -189,6 +202,7 @@
               <li>Drawbacks</li>
               <ul>
                 <li>No Shiny Dashboards</li>
+                <li>You have to get the numbers yourself (e.g. SQL)</li>
               </ul>
             </ul>
           </section>
@@ -196,13 +210,13 @@
         </section>
 
         <section>
-          <h1 class="title--fancy">How does it work?</h1>
-          [graphic] <br><br>
+          <h1 class="title--fancy">A/B Test Life Cycle</h1>
+
           <ul>
             <li>User lands on page</li>
-            <li>trigger()?</li>
+            <li>Checking <code>experiment.trigger()</code></li>
             <ul>
-              <li>check if experiment is running</li>
+              <li>check if experiment is running in metadata</li>
               <li>check if user is on right platform</li>
               <li>check if user is in sample size</li>
             </ul>
@@ -224,8 +238,6 @@
           <section data-background="img/above-seasons.png">
 
             <img class="fragment" src="./img/buybox-above-seasons.png" alt="BuyBox Above Seasons" style="border: 2px solid #fbc500; background-color: transparent; box-shadow: #fbc500 0px 0px 15px 0px;">
-
-
 
           </section>
 
@@ -315,11 +327,25 @@ tracking_adapter: {
           </section>
 
           <section>
+            <h2>Raw Numbers</h2>
+
+            <ul>
+              <li>Right out of Google Analytics</li>
+            </ul>
+
+            <br><br>
+
+            <img src="./img/sql-above-seasons.png" alt="SQL Above Seasons" style="border: 0; background-color: transparent; box-shadow: none;">
+
+          </section>
+
+          <section>
             <h2>Result</h2>
             <img src="./img/result-above-seasons.png" alt="Result Above Seasons" style="border: 0; background-color: transparent; box-shadow: none;">
             <br>
 
             <ul>
+              <li>Retrieve Data</li>
               <li>A: <span style="opacity: 0.4">Control Group</span></li>
               <li>B: <span style="opacity: 0.4">Above Seasons</span></li>
             </ul>
@@ -333,7 +359,7 @@ tracking_adapter: {
           <ul>
             <li>Go simple</li>
             <li>Don't get seduced by fancy dashboards</li>
-            <li>save <span class="gold">thousands</span> of €</li>
+            <li>save <span class="gold">thousands</span> of 💰</li>
             <li>implement fast and get results fast</li>
           </ul>
         </section>
